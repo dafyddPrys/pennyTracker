@@ -1,0 +1,8 @@
+{
+	"name" : "pennyTracker-core",
+	"dependencies": {
+		"angular": "*",
+		"angular-route": "*",
+		"jquery": "*"
+	}
+}

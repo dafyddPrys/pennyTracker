@@ -1,0 +1,26 @@
+{
+	"name" : "pennyTracker-core",
+	"description" : "an expense tracking website",
+	
+	"devDependencies": {
+		"express": "*",
+		"grunt": "*",
+		"grunt-contrib-concat":     "*",
+		"grunt-contrib-copy":       "*",
+		"grunt-contrib-jshint":     "*",
+		"grunt-contrib-nodeunit":   "*",
+		"grunt-contrib-uglify":     "*",
+		"grunt-contrib-watch":      "*",
+		"grunt-jsdoc":              "*",
+		"grunt-exec":               "*",
+		"grunt-karma":              "*",
+		"karma":                    "*",
+		"karma-jasmine":            "*",
+		"karma-phantomjs-launcher": "*"
+	},
+	
+	"scripts": {
+		"postinstall" : "bower install"
+	}
+	
+}
