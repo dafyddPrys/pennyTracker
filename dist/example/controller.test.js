@@ -16,5 +16,5 @@ describe("exampleController",function(){
 	
 	it("should have a test variable",function(){
 		expect(exampleController.test).toBe("hi");
-	})
-})
+	});
+});
