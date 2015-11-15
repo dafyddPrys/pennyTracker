@@ -3,12 +3,12 @@
 
 	angular
 		.module('pennyTracker.core')
-		.controller('ExampleController', ExampleController);
+		.controller('exampleController', ExampleController);
 
 
 	function ExampleController() {
 		var vm = this;
-		
+		vm.test = "hi";
 
 		activate();
 

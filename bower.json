@@ -3,6 +3,7 @@
 	"dependencies": {
 		"angular": "*",
 		"angular-route": "*",
+		"angular-mocks": "*",
 		"jquery": "*"
 	}
 }
