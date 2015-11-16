@@ -16,7 +16,8 @@
 		"grunt-karma":              "*",
 		"karma":                    "*",
 		"karma-jasmine":            "*",
-		"karma-phantomjs-launcher": "*"
+		"karma-phantomjs-launcher": "*",
+		"mongodb" :                 "*"
 	},
 	
 	"scripts": {
