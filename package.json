@@ -4,6 +4,7 @@
 	
 	"devDependencies": {
 		"express": "*",
+		"body-parser" : "*",
 		"grunt": "*",
 		"grunt-contrib-concat":     "*",
 		"grunt-contrib-copy":       "*",
@@ -17,7 +18,7 @@
 		"karma":                    "*",
 		"karma-jasmine":            "*",
 		"karma-phantomjs-launcher": "*",
-		"mongodb" :                 "*"
+		"mongodb" :                 "1.4.*"
 	},
 	
 	"scripts": {
