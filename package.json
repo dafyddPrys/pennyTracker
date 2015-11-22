@@ -18,11 +18,8 @@
 		"karma":                    "*",
 		"karma-jasmine":            "*",
 		"karma-phantomjs-launcher": "*",
-		"mongodb" :                 "1.4.*"
+		"mongodb" :                 "1.4.*",
+		"mongoose" : 					"*"
 	},
-	
-	"scripts": {
-		"postinstall" : "bower install"
-	}
 	
 }

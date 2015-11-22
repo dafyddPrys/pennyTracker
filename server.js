@@ -12,7 +12,7 @@ var http = require('http'),
     bodyParser = require('body-parser'),
     MongoClient = require('mongodb').MongoClient,
     Server = require('mongodb').Server,
-    CollectionDriver = require('./private/collectionDriver').CollectionDriver; 
+    CollectionDriver = require('./collectionDriver').CollectionDriver; 
     
 var app = express();
 app.set('port', process.env.PORT || 3000);
@@ -22,6 +22,12 @@ app.set('port', process.env.PORT || 3000);
  * create a JSON object. put here so it happens before any of the route handlers.
  */
 app.use(bodyParser.json());
+
+/**
+ * Serves the angular application (any static file asked for in the pubblic folder)
+ */
+app.use(express.static(__dirname + '/public'));
+
 
 /**
  * Set host and port for database
@@ -47,7 +53,7 @@ mongoClient.open(function(err, mongoClient) {
 /**
  * create a get call which takes a collection name as a parameter.
  */
-app.get('/:collection', function(req, res) {
+app.get('/api/:collection', function(req, res) {
    var params = req.params;
    //Call the collectionDriver's findAll function.
    collectionDriver.findAll(req.params.collection, function(error, objs) {
@@ -55,7 +61,7 @@ app.get('/:collection', function(req, res) {
           //no error: return a JSON object from the database.
 	      else { 
 	          res.set('Content-Type','application/json');
-                  res.send(200, objs);
+                  res.status(200, objs).send(objs);
          }
    	});
 });
@@ -64,14 +70,14 @@ app.get('/:collection', function(req, res) {
  * Call that takes a collection and entity name and calls te collectionDriver's GET 
  * function.
  */
-app.get('/:collection/:entity', function(req, res) { 
+app.get('/api/:collection/:entity', function(req, res) { 
    var params = req.params;
    var entity = params.entity;
    var collection = params.collection;
    if (entity) {
        collectionDriver.get(collection, entity, function(error, objs) { 
-          if (error) { res.send(400, error); }
-          else { res.send(200, objs); }
+          if (error) { res.status(400, error).send(error); }
+          else { res.status(200, objs).send(objs); }
        });
    } else {
       res.send(400, {error: 'bad url', url: req.url});
@@ -81,7 +87,7 @@ app.get('/:collection/:entity', function(req, res) {
 /**
  * Post a new item into the database
  */
-app.post('/:collection', function(req, res) {
+app.post('/api/:collection', function(req, res) {
     var object = req.body;
     var collection = req.params.collection;
     //save the body of the request to the database
@@ -90,13 +96,11 @@ app.post('/:collection', function(req, res) {
           else { res.send(201, docs); } 
      });
 });
-
-/**
- * Catch all function which accepts all arguments and will return a 404.
- */
-app.use(function (req,res) { //1
-    res.render('404', {url:req.url}); //2
+/*
+app.get("*", function(req,res){
+    res.sendfile('./public/index.html')
 });
+*/
 
 app.listen(app.get('port'));
 console.log('server listeing on port '  + app.get('port'));
