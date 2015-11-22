@@ -9,7 +9,7 @@
 	function DataService($q, $http) {
 		var service = {
 			getSpends : getSpends,
-			putSpends : putSpend
+			putSpend : putSpend
 		};
 		
 		return service;

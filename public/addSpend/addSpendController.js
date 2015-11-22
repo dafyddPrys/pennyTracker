@@ -9,9 +9,15 @@
 	function addSpendController(dataService) {
 		var vm = this;
 		
+		vm.spend = {
+			amount : null,
+			category : null
+		};
 		
 		//public functions
 		vm.saveSpend = saveSpend;
+		
+		
 		
 
 		activate();
@@ -27,13 +33,13 @@
 		 * Save a spend to the database. Show status/
 		 * @param {form} the spend form to be sent
 		 */
-		function saveSpend(form){
-			dataService.putSpend(form).then(
+		function saveSpend( spend ){
+			dataService.putSpend( spend  ).then(
 				function(data){
-					
+					console.log("[spendController]: spend saved");
 				},
 				function(error){
-					
+					console.error("[spendController]: spend could not be saved");
 				}
 			);	
 		}
