@@ -30,7 +30,7 @@ app.use(express.static(__dirname + '/public'));
 
 
 /**
- * Set host and port for database
+ * Set host and port for database. we will do all our application routing in angularJS.
  */
 var mongoHost = 'localHost';
 var mongoPort = 27017; 
