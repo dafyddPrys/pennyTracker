@@ -11,3 +11,7 @@
 	
 	
 </div>
+
+<div ng-repeat="spend in vm.spends">
+	{{spend.amount}} - {{spend.category}}   {{spend.date | date : 'longDate'}}
+</div>

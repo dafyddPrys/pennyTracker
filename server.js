@@ -54,12 +54,16 @@ mongoClient.open(function(err, mongoClient) {
  * create a get call which takes a collection name as a parameter.
  */
 app.get('/api/:collection', function(req, res) {
-   var params = req.params;
+
    //Call the collectionDriver's findAll function.
    collectionDriver.findAll(req.params.collection, function(error, objs) {
+       
     	  if (error) { res.send(400, error); }
+          
           //no error: return a JSON object from the database.
 	      else { 
+              
+              //set a content type header and send back the spends with an OK status
 	          res.set('Content-Type','application/json');
                   res.status(200, objs).send(objs);
          }

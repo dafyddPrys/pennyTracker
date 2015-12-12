@@ -13,6 +13,11 @@
 					controller : 'addSpendController',
 					controllerAs : 'vm' 
 				})
+				.when('/spends',{
+					templateUrl : 'seeSpends/seeSpends.html',
+					controller : 'seeSpendsController',
+					controllerAs : 'vm' 
+				})
 				.otherwise({
 					redirectTo : '/'
 				});

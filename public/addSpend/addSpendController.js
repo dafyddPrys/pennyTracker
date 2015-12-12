@@ -11,22 +11,25 @@
 		
 		vm.spend = {
 			amount : null,
-			category : null
+			category : null,
+			date : null
 		};
+		
+		vm.spends;
 		
 		//public functions
 		vm.saveSpend = saveSpend;
 		
 		
-		
-
 		activate();
 
 		////////////////
 
 		function activate() { 
 			
+			getSpends();
 			console.log('add spend controller loaded');
+			 
 		}
 		
 		/**
@@ -34,15 +37,46 @@
 		 * @param {form} the spend form to be sent
 		 */
 		function saveSpend( spend ){
+			
+			if(!spend.date){
+				
+				spend.date = new Date();
+				
+			} else {
+				
+				//make the date into a consistent format probably a date object?)
+			}
+			
 			dataService.putSpend( spend  ).then(
+				
 				function(data){
 					console.log("[spendController]: spend saved");
+					getSpends();
 				},
+				
 				function(error){
 					console.error("[spendController]: spend could not be saved");
 				}
+				
 			);	
 		}
+		
+		
+		/**
+		 * Get all spends from the data service
+		 */
+		function getSpends(){
+			
+			dataService.getSpends().then(
+				function(data){
+					vm.spends = data.data;
+				},
+				function(error){
+					console.error(error.status + error.statusMessage);
+				}
+			);
+		}
+	
 		
 	}
 })();
