@@ -1,17 +1,31 @@
-<div>
-	<form>
-		Amount: <input type="number" ng-model="vm.spend.amount">
-		Category: <input type="text" ng-model="vm.spend.category">
-		
-		
-		<input type="submit" ng-click="vm.saveSpend(vm.spend)">
-		
-	</form>
-	
-	
-	
-</div>
+<div class="center">
+	<div class="form-center">
+		<form>
+			<penny-amount-input></penny-amount-input>
+			<penny-date-input></penny-date-input>
+			<penny-category-input></penny-category-input>
+			<textarea class="u-full-width" placeholder="Comments" ng-model="vm.spend.comments"></textarea>
 
-<div ng-repeat="spend in vm.spends">
-	{{spend.amount}} - {{spend.category}}   {{spend.date | date : 'longDate'}}
+			<input class="button-primary" type="submit" ng-click="vm.saveSpend(vm.spend)">
+		</form>
+	</div>
+	
+	<table class="center">
+		<thead>
+			<tr>
+				<th class="first-column">Date</th>
+				<th>Amount</th>
+				<th>Category</th>
+				<th >Comments</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="spend in vm.spends">
+				<td class="first-column">{{spend.date | date : 'longDate'}}</td>
+				<td>{{spend.amount | currency : "£" : 0 }}</td>
+				<td>{{spend.category}}</td>
+				<td class="comments-column">{{spend.comments}}</td>
+			</tr>
+		</tbody>
+	</table>
 </div>

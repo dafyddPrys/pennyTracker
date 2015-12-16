@@ -20,6 +20,6 @@
 		"karma-phantomjs-launcher": "*",
 		"mongodb" :                 "1.4.*",
 		"mongoose" : 					"*"
-	},
+	}
 	
 }

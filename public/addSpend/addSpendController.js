@@ -12,7 +12,8 @@
 		vm.spend = {
 			amount : null,
 			category : null,
-			date : null
+			date : null,
+			comments: null,
 		};
 		
 		vm.spends;
@@ -29,6 +30,7 @@
 			
 			getSpends();
 			console.log('add spend controller loaded');
+			vm.spend.date = new Date();
 			 
 		}
 		
@@ -37,7 +39,10 @@
 		 * @param {form} the spend form to be sent
 		 */
 		function saveSpend( spend ){
-			
+			if(!spend.amount){
+				//TODO add invalid state here
+				return;
+			}
 			if(!spend.date){
 				
 				spend.date = new Date();
