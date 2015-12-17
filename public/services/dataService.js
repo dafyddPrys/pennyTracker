@@ -53,4 +53,10 @@
 			return deferred.promise;
 		}
 	}
+	
+	function orderSpendsByDate(spends){
+		
+	}
+	
+	
 })();

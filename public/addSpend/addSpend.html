@@ -1,15 +1,7 @@
 <div class="center">
-	<div class="form-center">
-		<form>
-			<penny-amount-input></penny-amount-input>
-			<penny-date-input></penny-date-input>
-			<penny-category-input></penny-category-input>
-			<textarea class="u-full-width" placeholder="Comments" ng-model="vm.spend.comments"></textarea>
 
-			<input class="button-primary" type="submit" ng-click="vm.saveSpend(vm.spend)">
-		</form>
-	</div>
-	
+	<penny-add-spend-form save-spend="vm.saveSpend"></penny-add-spend-form>
+
 	<table class="center">
 		<thead>
 			<tr>

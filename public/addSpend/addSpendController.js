@@ -12,7 +12,7 @@
 		vm.spend = {
 			amount : null,
 			category : null,
-			date : null,
+			date : new Date(),
 			comments: null,
 		};
 		
@@ -30,7 +30,7 @@
 			
 			getSpends();
 			console.log('add spend controller loaded');
-			vm.spend.date = new Date();
+
 			 
 		}
 		
@@ -56,6 +56,7 @@
 				
 				function(data){
 					console.log("[spendController]: spend saved");
+					clearSpend();
 					getSpends();
 				},
 				
@@ -82,6 +83,13 @@
 			);
 		}
 	
-		
+		function clearSpend(){
+			vm.spend = {
+				amount : null,
+				category : null,
+				date : new Date(),
+				comments: null,
+			};
+		}
 	}
 })();

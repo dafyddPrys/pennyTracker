@@ -1,0 +1,8 @@
+<form class="form-center">
+	<input class="u-full-width" type="number" ng-model="vm.spend.amount" placeholder="Amount (£)">
+	<input class="u-full-width" type="date" ng-model="vm.spend.date">
+	<input class="u-full-width" type="text" ng-model="vm.spend.category" placeholder="Category">
+	<textarea class="u-full-width" placeholder="Comments" ng-model="vm.spend.comments"></textarea>
+
+	<input class="button-primary" type="submit" ng-click="vm.save(vm.spend)">
+</form>
