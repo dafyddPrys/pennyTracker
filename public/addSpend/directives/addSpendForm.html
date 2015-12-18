@@ -1,8 +1,11 @@
-<form class="form-center">
+<form name="spendForm" class="form-center">
 	<input class="u-full-width" type="number" ng-model="vm.spend.amount" placeholder="Amount (£)">
 	<input class="u-full-width" type="date" ng-model="vm.spend.date">
 	<input class="u-full-width" type="text" ng-model="vm.spend.category" placeholder="Category">
 	<textarea class="u-full-width" placeholder="Comments" ng-model="vm.spend.comments"></textarea>
 
-	<input class="button-primary" type="submit" ng-click="vm.save(vm.spend)">
+	<div class="row">
+		<input class="button-primary five columns" type="submit" ng-click="vm.save(vm.spend)">
+		<penny-save-notification ng-show="vm.showNotification" state="vm.saveState" class="seven columns"></penny-save-notification>
+	</div>
 </form>

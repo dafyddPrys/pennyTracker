@@ -7,7 +7,7 @@
 
 	function pennyAddSpendForm() {
 		// Usage:
-		//
+		// Element only. Pass in function to call after save successful
 		// Creates:
 		//
 		var directive = {
@@ -19,7 +19,7 @@
 			link: link,
 			restrict: 'E',
 			scope: {
-				saveSpend: '&'
+				refresh: '&',
 			}
 		};
 		return directive;
@@ -29,20 +29,77 @@
 	}
 	/* @ngInject */
 
-	saveSpendController.$inject=[ 'dataService','$scope'];
-	function saveSpendController (dataService, $scope) {
+	saveSpendController.$inject=[ 'dataService'];
+	function saveSpendController (dataService) {
 		var vm = this;
+		vm.saveState = "";		
+		// public variables
+		vm.formValid = false;
 		vm.spend = {
 			date : new Date()
 		};
 		
+		
+		// public functions
+		vm.save = save;
+
+		///////////////////////
+		
 		//wrapped in this function so we can set a break on it.
-		vm.save = function(spend){
-			console.log(spend.amount);
+		
+		function save(spend){
+						
+			var valid = isSpendValid(spend);
+			if(!valid){
+				vm.showNotification = true;
+				vm.saveState = "invalid";
+			} else {
+				//call the function () to get to the actual function 
+				//and then call it with the arguments we want.
+				dataService.putSpend(spend).then(
+					function(data){
+						vm.showNotification = true;
+						vm.saveState = "success";
+						vm.refresh();
+						clearSpend(spend);
+					
+					}, function(error){
+						vm.showNotification = true;
+						vm.saveState = "error";
+				});
+			}
+		}
+		
+		
+		///////////////////////
+		// Private functions
+		
+		/**
+		 * Checks if a spend has an amount and a valid date (
+		 * not in the future)
+		 * @params spend the spend object
+		 * @returns {boolean} whether the spend is valid
+		 */
+		function isSpendValid(spend){
+			var now = new Date();
 			
-			//call the function () to get to the actual function 
-			//and then call it with the arguments we want.
-			vm.saveSpend()(spend);
+			if(!spend.amount || !spend.date){
+				return false;
+			} else if( spend.date >= now){
+				return false;				
+			} 
+			
+			return true;
+		}
+		
+		/**
+		 * Reset all properties of the spend back to initial state;
+		 */
+		function clearSpend(spend){
+			spend.amount = null;
+			spend.date = new Date();
+			spend.catefory = null;
+			spend.comments = null;
 		}
 				
 	}
