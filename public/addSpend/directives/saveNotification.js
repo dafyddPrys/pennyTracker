@@ -37,7 +37,7 @@
 				vm.class="error-notification";
 				vm.message = "Fix the errors above before saving."
 			} else if(vm.state === "success") {
-				vm.message = "Spend saved successfully!"
+				vm.message = "Spend saved successfully!";
 				vm.class="success-notification";
 			} else {
 				//Something else
