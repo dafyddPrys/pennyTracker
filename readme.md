@@ -1,4 +1,6 @@
-##I made this project to explore dev tools like Grunt and also learn more about back end development with node and mongodb.
+##Penny Tracker is a full stack of applications which will help you keep track of your spending.
+
+This is mainly for my experimentation. It is certainly not a finished product!
 
 **from the root of the project:**
 - run npm install
