@@ -38,8 +38,8 @@
 		vm.spend = {
 			date : new Date()
 		};
-		
-		
+
+
 		// public functions
 		vm.save = save;
 
@@ -47,51 +47,34 @@
 		
 		//wrapped in this function so we can set a break on it.
 		
-		function save(spend){
-						
-			var valid = isSpendValid(spend);
-			if(!valid){
-				vm.showNotification = true;
-				vm.saveState = "invalid";
-			} else {
+		function save(isValid) {
+			if (isValid) {
+				var spend = vm.spend;
+				
 				//call the function () to get to the actual function 
 				//and then call it with the arguments we want.
 				dataService.putSpend(spend).then(
-					function(data){
+					function (data) {
 						vm.showNotification = true;
 						vm.saveState = "success";
 						vm.refresh();
 						clearSpend(spend);
-					
-					}, function(error){
+
+					}, function (error) {
 						vm.showNotification = true;
 						vm.saveState = "error";
-				});
+					});
+
+			} else {
+				vm.showNotification = true;
+				vm.saveState = "invalid";
 			}
 		}
 		
 		
 		///////////////////////
 		// Private functions
-		
-		/**
-		 * Checks if a spend has an amount and a valid date (
-		 * not in the future)
-		 * @params spend the spend object
-		 * @returns {boolean} whether the spend is valid
-		 */
-		function isSpendValid(spend){
-			var now = new Date();
 			
-			if(!spend.amount || !spend.date){
-				return false;
-			} else if( spend.date >= now){
-				return false;				
-			} 
-			
-			return true;
-		}
-		
 		/**
 		 * Reset all properties of the spend back to initial state;
 		 */

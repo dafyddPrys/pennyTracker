@@ -1,11 +1,33 @@
-<form name="spendForm" class="form-center">
-	<input class="u-full-width" type="number" ng-model="vm.spend.amount" placeholder="Amount (£)">
-	<input class="u-full-width" type="date" ng-model="vm.spend.date">
-	<input class="u-full-width" type="text" ng-model="vm.spend.category" placeholder="Category">
-	<textarea class="u-full-width" placeholder="Comments" ng-model="vm.spend.comments"></textarea>
+<form name="spendForm" ng-submit="vm.save(spendForm.$valid)" novalidate class="form-center" >
+	<div class="form-group">
+		<label>Amount</label>
+		<input name="amount" class="u-full-width"  type="number" ng-model="vm.spend.amount" placeholder="£" required
+		ng-class="{'error': (spendForm.$submitted || spendForm.amount.$touched) && (spendForm.amount.$invalid) }">
+		<div ng-show="spendForm.$submitted || spendForm.amount.$touched">
+			<p ng-show="spendForm.amount.$invalid" class="help-block">You need to enter an amount.</p>
+		</div>
+		{{spendForm.amount}}
+	</div>
+	<div class="form-group">
+		<label>Date</label>
+		<penny-date-picker name="date" class="u-full-width" type="date" ng-model="vm.spend.date" required
+		ng-class="{'error': (spendForm.$submitted || spendForm.date.$error.futureDate) && (spendForm.date.$invalid) }"></penny-date-picker>
+		<div ng-show="spendForm.$submitted || spendForm.date.$touched">
+			<p ng-show="spendForm.date.$error.futureDate" class="help-block">The date cannot be in the future!</p>
+		</div>
+		<br/>
+	</div>
+	<div class="form-group">
+		<label>Category</label>
+		<input name="category" class="u-full-width" type="text" ng-model="vm.spend.category">
+	</div>
+	<div class="form-group">
+		<label>Comments</label>
+		<textarea name="comments" class="u-full-width" placeholder="Comments" ng-model="vm.spend.comments"></textarea>
+	</div>
 
 	<div class="row">
-		<input class="button-primary five columns" type="submit" ng-click="vm.save(vm.spend)">
+		<button class="button-primary five columns" type="submit">Add spend</button>
 		<penny-save-notification ng-show="vm.showNotification" state="vm.saveState" class="seven columns"></penny-save-notification>
 	</div>
 </form>
